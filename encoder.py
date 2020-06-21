@@ -17,7 +17,7 @@ def CreateMessage(message):
                 bit_array.append(0)
             else:
                 bit_array.append(1)
-            print(bit_array)
+    print(bit_array)
     return bit_array
 
 
@@ -34,6 +34,7 @@ def Encode(picture, bit_array):
             pass
     width, height = picture.size
     encoded_bytes = pixel_buffer.tobytes()
+    print(encoded_bytes[0])
     encoded_picture = Image.frombytes("RGB", (width, height), encoded_bytes)
     return encoded_picture
 
@@ -43,7 +44,13 @@ def main():
     message = BytesIO(b"hello world")
     bit_array = CreateMessage(message)
     encoded_picture = Encode(picture, bit_array)
-    encoded_picture.save(r"C:\Users\Mushbrain\Desktop\fromb.jpg", "JPEG")
+    print(encoded_picture.getpixel((0, 0)))
+
+    encoded_picture.save(r"C:\Users\Mushbrain\Desktop\fromb.jpg", subsampling=0, quality=100)
+    encoded_picture.save(r"C:\Users\Mushbrain\Desktop\fromb.png")
+
+    picture1 = Image.open(r"C:\Users\Mushbrain\Desktop\fromb.png")
+    print(picture1.getpixel((0, 0)))
 
 
 if __name__ == "__main__":
