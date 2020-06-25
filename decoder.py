@@ -4,6 +4,12 @@ from PIL import Image
 
 
 def DecodeMessage(picture):
+    """
+    Takes user image (must be lossless format) extracts the least significant bit (LSB).
+    Compiles LSB into bytes that are stored into an array.
+    :param picture: user image
+    :return: String; array of bytes
+    """
     pixel_byte = picture.tobytes()
     pixel_stream = BytesIO(pixel_byte)  # creates stream with bytes from pixel
     pixel_buffer = pixel_stream.getbuffer()  # turns stream into a memoryview that is mutable and consistent
@@ -24,6 +30,11 @@ def DecodeMessage(picture):
 
 
 def CompileMessage(byte_array):
+    """
+    Takes an array of strings representing ascii binary.
+    :param byte_array: String; ascii bytes
+    :return: String; hidden message
+    """
     message = ""
     try:
         for byte in byte_array:

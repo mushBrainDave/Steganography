@@ -4,12 +4,24 @@ from PIL import Image
 
 
 def CreateMessage(message):
+    """
+    Takes a string and returns the ascii binary representation.
+    :param message: string given from user
+    :return: String; string
+    """
     temp = bin(int.from_bytes(message.encode(), 'big'))[2:]  # removes 0b from beginning
     string = temp.zfill(len(temp)+1)  # adds 0 to beginning
     return string
 
 
 def Encode(picture, string):
+    """
+    Takes a image (can be lossy format) creates a mutable view that maintains consistency among the objects.
+    Checks and changes the least significant bit (LSB) of the image to contain ascii bits.
+    :param picture: user image
+    :param string: user hidden message
+    :return: raw image data; user image with hidden ascii bits
+    """
     pixel_byte = picture.tobytes()
     pixel_stream = BytesIO(pixel_byte)  # creates stream with bytes from pixel
     pixel_buffer = pixel_stream.getbuffer()  # turns stream into a memoryview that is mutable and consistent
