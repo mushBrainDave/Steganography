@@ -13,7 +13,6 @@ def Encode(picture, string):
     pixel_byte = picture.tobytes()
     pixel_stream = BytesIO(pixel_byte)  # creates stream with bytes from pixel
     pixel_buffer = pixel_stream.getbuffer()  # turns stream into a memoryview that is mutable and consistent
-    s = "0"
     for index, bit in enumerate(string):
         if pixel_buffer[index] % 2 == 0 and int(bit) == 1:
             pixel_buffer[index] += 1
