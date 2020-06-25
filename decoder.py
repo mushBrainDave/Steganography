@@ -10,9 +10,9 @@ def DecodeMessage(picture):
     string = ""
     byte_array = []
     for index, letter in enumerate(pixel_buffer):
-        if index > 100:
+        if index > 100:  # temporary for simplicity
             break
-        elif index % 8 == 0:
+        elif index % 8 == 0:  # will be kept in some form
             byte_array.append(string)
             string = ""
         if letter % 2 == 0:
@@ -24,10 +24,10 @@ def DecodeMessage(picture):
 
 
 def CompileMessage(byte_array):
-    message = ''
+    message = ""
     try:
         for byte in byte_array:
-            message += str(int(byte, 2).to_bytes(1, byteorder="little").decode("ascii"))
+            message += str(int(byte, 2).to_bytes(1, byteorder="little").decode("ascii"))  # messy
     except UnicodeDecodeError:
         pass
     return message
