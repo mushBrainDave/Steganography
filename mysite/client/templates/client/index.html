@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hidden Messages</title>
+</head>
+<body>
+{% if hidden_message_list %}
+    <ul>
+    {% for message in hidden_message_list %}
+        <li><a href="{% url 'client:message' message.id %}">{{ message.message_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
+</html>
