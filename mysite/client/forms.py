@@ -1,8 +1,8 @@
 from django import forms
-from .models import Message
+from .models import Picture
 
 
 class NameForm(forms.ModelForm):
     class Meta:
-        model = Message
-        fields = ["message_text"]
+        model = Picture
+        fields = ["pic", "message"]

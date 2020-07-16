@@ -9,5 +9,6 @@ class Message(models.Model):
 
 
 class Picture(models.Model):
-    message = models.ForeignKey(Message, on_delete=models.CASCADE)
-    pic = models.ImageField('Picture')
+    #message = models.ForeignKey(Message, on_delete=models.CASCADE)
+    message = models.CharField(max_length=200)
+    pic = models.ImageField(upload_to='images/')
