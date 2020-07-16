@@ -7,3 +7,4 @@ mysite/client/__pycache__
 mysite/client/__init__.py
 mysite/mysite/__pycache__
 mysite/mysite/__init__.py
+mysite/media/
