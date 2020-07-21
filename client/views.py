@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import generic
 
 from .models import Message
-from .forms import NameForm
+from .forms import PictureForm
 
 
 def index(request):
@@ -25,16 +25,16 @@ def message(request, message_id):
     return render(request, 'client/detail.html', {'message': message})
 
 
-def hotel_image_view(request):
+def image_view(request):
     if request.method == 'POST':
-        form = NameForm(request.POST, request.FILES)
+        user_pic = PictureForm(request.POST, request.FILES)
 
-        if form.is_valid():
-            form.save()
+        if user_pic.is_valid():
+            user_pic.save()
             return HttpResponseRedirect('/client/')
     else:
-        form = NameForm()
-    return render(request, 'client/image_form.html', {'form': form})
+        user_pic = PictureForm()
+    return render(request, 'client/image_form.html', {'user_pic': user_pic})
 
 
 def success(request):
