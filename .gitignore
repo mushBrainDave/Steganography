@@ -7,5 +7,6 @@ client/__pycache__
 client/__init__.py
 steganography/__pycache__
 steganography/__init__.py
+decoder/__pycache__
+encoder/__pycache__
 media/
-
