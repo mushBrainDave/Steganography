@@ -1,7 +1,8 @@
 from django import forms
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
 from .models import Picture
 from encoder import encoder
-from decoder import decoder
 
 
 class PictureForm(forms.ModelForm):
@@ -13,4 +14,3 @@ class PictureForm(forms.ModelForm):
         message = self.cleaned_data['message']
         cleaned_message = encoder.CreateMessage(message)
         return cleaned_message
-
