@@ -42,7 +42,6 @@ def main():
     message = "hello world"
     string = CreateMessage(message)
     encoded_picture = Encode(picture, string)
-    encoded_picture.save(r"C:\Users\Mushbrain\Desktop\fromb.jpg", subsampling=0, quality=100)
     encoded_picture.save(r"C:\Users\Mushbrain\Desktop\fromb.png")
 
 
