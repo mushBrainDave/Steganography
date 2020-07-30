@@ -15,15 +15,15 @@ def DecodeMessage(picture):
     pixel_buffer = pixel_stream.getbuffer()  # turns stream into a memoryview that is mutable and consistent
     string = ""
     byte_array = []
-    for index, letter in enumerate(pixel_buffer):
+    for index, byte in enumerate(pixel_buffer):
         if index > 100:  # temporary for simplicity
             break
         elif index % 8 == 0:  # will be kept in some form
             byte_array.append(string)
             string = ""
-        if letter % 2 == 0:
+        if byte % 2 == 0:
             string += str(0)
-        elif letter % 2 == 1:
+        elif byte % 2 == 1:
             string += str(1)
     byte_array.pop(0)
     return byte_array
