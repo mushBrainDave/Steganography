@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from io import BytesIO
-from PIL import Image
+from PIL import Image, PngImagePlugin
+from PIL.PngImagePlugin import PngImageFile, ChunkStream, getchunks
 
 
 def CreateMessage(message):
@@ -22,23 +23,39 @@ def Encode(picture, string):
     :param string: user hidden message
     :return: raw image data; user image with hidden ascii bits
     """
-    pixel_byte = picture.tobytes()
-    pixel_stream = BytesIO(pixel_byte)  # creates stream with bytes from pixel
-    pixel_buffer = pixel_stream.getbuffer()  # turns stream into a memoryview that is mutable and consistent
-    for index, bit in enumerate(string):
+    pic = Image.open(picture)
+    pic.save(BytesIO(), 'PNG', compression_level=100)
+    #Image.open(pic.read())
+    #print(type(picture))
+    #picture.show()
+    print(picture)
+    #pixel_byte = picture.tobytes()  # this and one below uncomment and change 34 variable
+    #pixel_stream = BytesIO(pixel_byte)  # creates stream with bytes from pixel
+    #print(pixel_stream.read())
+    pixel_buffer = picture.getbuffer()  # turns stream into a memoryview that is mutable and consistent
+    for index, bit in enumerate(string, 600):
         if pixel_buffer[index] % 2 == 0 and int(bit) == 1:
             pixel_buffer[index] += 1
         elif pixel_buffer[index] % 2 == 1 and int(bit) == 0:
             pixel_buffer[index] -= 1
 
-    width, height = picture.size
+    #width, height = picture.size
     encoded_bytes = pixel_buffer.tobytes()
-    encoded_picture = Image.frombytes("RGB", (width, height), encoded_bytes)
-    return encoded_picture
+    en = BytesIO(encoded_bytes)
+    #encoded_picture = Image.frombytes("RGB", (width, height), encoded_bytes)
+    #print(encoded_picture)  # needs to be pngimagefile
+#    encoded_picture.save(BytesIO(), format='PNG')
+    #print(PngImagePlugin.getchunks(encoded_picture))
+#    print(encoded_picture)
+#    en = encoded_picture.tobytes()
+#    en2 = BytesIO(en)
+    #a = PngImageFile(encoded_picture.open())
+    #print(type(en2))
+    return en
 
 
 def main():
-    picture = Image.open(r"C:\Users\Mushbrain\Desktop\untitled1.jpg")
+    picture = Image.open(r"C:\Users\Mushbrain\Desktop\1.png")
     message = "hello world"
     string = CreateMessage(message)
     encoded_picture = Encode(picture, string)

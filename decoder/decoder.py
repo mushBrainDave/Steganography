@@ -15,7 +15,7 @@ def DecodeMessage(picture):
     pixel_buffer = pixel_stream.getbuffer()  # turns stream into a memoryview that is mutable and consistent
     string = ""
     byte_array = []
-    for index, byte in enumerate(pixel_buffer):
+    for index, byte in enumerate(pixel_buffer, 600):
         if index > 100:  # temporary for simplicity
             break
         elif index % 8 == 0:  # will be kept in some form
@@ -45,7 +45,7 @@ def CompileMessage(byte_array):
 
 
 def main():
-    picture = Image.open(r"C:\Users\Mushbrain\Desktop\fromb.png")
+    picture = Image.open(r"C:\Users\Mushbrain\Desktop\1.png")
     byte_array = DecodeMessage(picture)
     message = CompileMessage(byte_array)
     print(message)
