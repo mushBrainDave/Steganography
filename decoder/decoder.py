@@ -25,7 +25,7 @@ def DecodeMessage(picture):
             string += str(0)
         elif byte % 2 == 1:
             string += str(1)
-    byte_array.pop(0)
+    byte_array.pop(0) # remove PNG file header
     return byte_array
 
 
@@ -44,7 +44,7 @@ def CompileMessage(byte_array):
             message += str(decode)
             # message += str(int(byte, 2).to_bytes(1, byteorder="little").decode("ascii"))  # messy
     except UnicodeDecodeError:
-        pass
+        print("End of message")
     return message
 
 
