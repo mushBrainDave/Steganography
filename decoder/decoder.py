@@ -38,9 +38,9 @@ def CompileMessage(byte_array):
     message = ""
     try:
         for byte in byte_array:
-            string = int(byte, 2)
-            byte = string.to_bytes(1, byteorder="big")
-            decode = byte.decode("ascii")
+            integerType = int(byte, 2)
+            byteType = integerType.to_bytes(1, byteorder="big")
+            decode = byteType.decode("ascii")
             message += str(decode)
             # message += str(int(byte, 2).to_bytes(1, byteorder="little").decode("ascii"))  # messy
     except UnicodeDecodeError:
