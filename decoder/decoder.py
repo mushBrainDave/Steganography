@@ -38,7 +38,11 @@ def CompileMessage(byte_array):
     message = ""
     try:
         for byte in byte_array:
-            message += str(int(byte, 2).to_bytes(1, byteorder="little").decode("ascii"))  # messy
+            string = int(byte, 2)
+            byte = string.to_bytes(1, byteorder="big")
+            decode = byte.decode("ascii")
+            message += str(decode)
+            # message += str(int(byte, 2).to_bytes(1, byteorder="little").decode("ascii"))  # messy
     except UnicodeDecodeError:
         pass
     return message

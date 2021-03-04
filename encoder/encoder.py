@@ -9,9 +9,14 @@ def CreateMessage(message):
     :param message: string given from user
     :return: String; string
     """
-    temp = bin(int.from_bytes(message.encode(), 'big'))[2:]  # removes 0b from beginning
-    string = temp.zfill(len(temp)+1)  # adds 0 to beginning
-    return string
+    encode = message.encode("ascii")
+    bytes = int.from_bytes(encode, "big")
+    binary = bin(bytes)
+    cleanedBinary = binary[2:]
+    preppedBinary = cleanedBinary.zfill(len(cleanedBinary) + 1)
+    # temp = bin(int.from_bytes(message.encode("ascii"), 'big'))[2:]  # removes 0b from beginning
+    # string = temp.zfill(len(temp)+1)  # adds 0 to beginning
+    return preppedBinary
 
 
 def Encode(picture, string):
